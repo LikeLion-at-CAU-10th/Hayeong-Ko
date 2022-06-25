@@ -1,0 +1,71 @@
+@import './variable.scss';
+
+//content == pass --> 추후 설정
+@mixin respond-to($media) {
+    @if $media == mobile {
+        @media only screen and (max-width: $tabletSize) {@content;}
+    }
+    @else if $media == tablet {
+        @media only screen and (min-width: $tabletSize) and (max-width: $pcSize) {@content;}
+    }
+
+    @else if $media == pc {
+        @media only screen and (min-width: $pcSize) {@content;}
+    }
+}
+
+.contents {
+    @include respond-to(mobile) {
+        font-size: 15px;
+    }
+
+    @include respond-to(tablet) {
+        font-size: 17px;
+    }
+
+    @include respond-to(pc) {
+        font-size: 20px;
+    }
+}
+
+.name {
+    @include respond-to(mobile) {
+        font-size: 30px;
+    }
+
+    @include respond-to(tablet) {
+        font-size: 40px;
+    }
+
+    @include respond-to(pc) {
+        font-size: 50px;
+    }
+}
+
+.portfolio {
+    @include respond-to(mobile) {
+        font-size: 30px;
+    }
+
+    @include respond-to(tablet) {
+        font-size: 40px;
+    }
+
+    @include respond-to(pc) {
+        font-size: 50px;
+    }
+}
+
+.plan_1 {
+    @include respond-to(mobile) {
+        font-size: 30px;
+    }
+
+    @include respond-to(tablet) {
+        font-size: 40px;
+    }
+
+    @include respond-to(pc) {
+        font-size: 50px;
+    }
+}
