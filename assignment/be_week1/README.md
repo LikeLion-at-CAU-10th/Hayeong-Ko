@@ -1,2 +1,2 @@
-<img src="./img/create.png">
-<img src="./img/get.png">
+<img src="./img/be_week3_create.png">
+<img src="./img/be_week3_get.png">

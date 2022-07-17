@@ -149,3 +149,65 @@ def delete_profile(request, id):
                 'message': 'method error',
                 'data': None
         })
+        
+def create_url(request, profile_id):
+    if request.method == "POST":
+
+        body = request.POST
+
+        new_url = Url.objects.create(
+            profile = get_object_or_404(Profile, pk = profile_id),
+            title = body['title'],
+            link = body['link']
+        )
+
+        new_url_json = {
+            "id": new_url.id,
+            "title": new_url.title,
+            "link": new_url.link,
+        }
+
+        return JsonResponse({
+            "status": 200,
+            "success" : True,
+            "message": "url 생성 성공",
+            "data": new_url_json
+        })
+
+    return JsonResponse({
+        "status": 405,
+        "success" : False,
+        "message": "method error",
+        "data": None
+    })
+
+def get_url(requests):
+
+    if requests.method == "GET":
+        
+        url_all = Url.objects.all()
+
+        url_all_json = []
+
+        for url in url_all:
+            url_json = {
+                "id": url.id,
+                "title": url.title,
+                "link": url.link,
+            }
+
+            url_all_json.append(url_json)
+
+        return JsonResponse({
+            "status": 200,
+            "success" : True,
+            "message": "url 보기 성공",
+            "data": url_all_json
+        })
+
+    return JsonResponse({
+        "status": 405,
+        "success" : False,
+        "message": "method error",
+        "data": None
+    })

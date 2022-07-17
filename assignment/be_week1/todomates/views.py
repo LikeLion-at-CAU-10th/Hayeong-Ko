@@ -117,6 +117,8 @@ def update_category(request, id):
             })
 
 def delete_category(request, id):
+
+
     if request.method == "DELETE":
 
         delete_category = get_object_or_404(Category, pk = id)
@@ -135,3 +137,71 @@ def delete_category(request, id):
                 'message': 'method error',
                 'data': None
         })
+
+def create_todo(request, category_id):
+    if request.method == "POST":
+
+        body = request.POST
+        img = request.FILES['thumb_nail']
+
+        new_todo = Todo.objects.create(
+            category = get_object_or_404(Category, pk = category_id),
+            content = body['content'],
+            thumb_nail = img
+        )
+
+        new_todo_json = {
+            "id" : new_todo.id,
+            "content" : new_todo.content,
+            "thumb_nail" : '/media/' + str(new_todo.thumb_nail),
+            "pup_date" : new_todo.pup_date,
+        }
+
+        return JsonResponse({
+            "status": 200,
+            "success" : True,
+            "message": "todo 생성 성공",
+            "data": new_todo_json
+        })
+
+    return JsonResponse({
+        "status": 405,
+        "success" : False,
+        "message": "method error",
+        "data": None
+    })
+
+def get_todo(request):
+    if request.method == "GET":
+
+        todo_all = Todo.objects.all()
+
+        todo_all_json = []
+
+        for todo in todo_all:
+            todo_json = {
+                "id": todo.id,
+                "content": todo.content,
+                "thumb_nail": '/media/' + str(todo.thumb_nail),
+                "pup_date": todo.pup_date,
+            }
+
+            todo_all_json.append(todo_json)
+
+        return JsonResponse({
+        "status": 200,
+        "success" : True,
+        "message": "todo 생성 성공",
+        "data": todo_all_json
+        })
+
+    return JsonResponse({
+        "status": 405,
+        "success" : False,
+        "message": "method error",
+        "data": None
+    })
+    
+
+    
+

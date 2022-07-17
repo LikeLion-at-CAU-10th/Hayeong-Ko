@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from posts.views import http_response, index, json_response
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +26,8 @@ urlpatterns = [
     path('json/', json_response, name='json_response'),
 
     path('todomates/', include('todomates.urls')),
-    path('profiles/', include('profiles.urls'))
+    path('profiles/', include('profiles.urls')),
+    
 ]
+
+urlpatterns += static(settings.MEDIA_URL,  document_root=settings.MEDIA_ROOT)
