@@ -2,8 +2,10 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from .models import *
-
+# from django.views.decorations.http import require_http_methods #이를 제외한 method에는 405 리턴
+# import serialize
 # Create your views here.
+# @require_http_methods(['POST', "GET"])
 def create_category(requests):
     if requests.method == "POST":
 

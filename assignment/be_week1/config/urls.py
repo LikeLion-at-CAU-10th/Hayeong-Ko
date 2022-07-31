@@ -27,7 +27,7 @@ urlpatterns = [
 
     path('todomates/', include('todomates.urls')),
     path('profiles/', include('profiles.urls')),
-    
+    path('likelion/', include('likelion.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,  document_root=settings.MEDIA_ROOT)
